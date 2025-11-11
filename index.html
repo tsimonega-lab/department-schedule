@@ -1,165 +1,297 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
+
 <html>
+
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2487.7">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+
+<title>Department Schedule Planner</title>
+
+<style>
+
+body{font-family:Arial,sans-serif;padding:20px;background:#f5f5f5}
+
+.container{max-width:1200px;margin:0 auto;background:white;padding:30px;border-radius:8px}
+
+h1{color:#2c3e50;margin-bottom:30px}
+
+.faculty{margin-bottom:40px;border:1px solid #ddd;border-radius:6px;overflow:hidden}
+
+.faculty-header{background:#34495e;color:white;padding:15px;font-size:18px;font-weight:bold}
+
+.year{padding:15px;border-bottom:1px solid #eee}
+
+.semester{margin:10px 0}
+
+.semester-label{font-weight:bold;margin-bottom:8px}
+
+.boxes{display:flex;gap:8px;flex-wrap:wrap}
+
+.box{width:50px;height:50px;border:2px solid #bdc3c7;border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:bold;background:white;font-size:14px}
+
+.box.teaching{background:#3498db;border-color:#2980b9;color:white}
+
+.box.release{background:#e74c3c;border-color:#c0392b;color:white}
+
+.box.sabbatical{background:#95a5a6;border-color:#7f8c8d;color:white}
+
+.legend{display:flex;gap:20px;margin-bottom:20px;padding:15px;background:#f8f9fa;border-radius:6px}
+
+.legend-item{display:flex;align-items:center;gap:8px}
+
+.legend-box{width:30px;height:30px;border-radius:4px;border:2px solid}
+
+button{padding:8px 16px;background:#3498db;color:white;border:none;border-radius:4px;cursor:pointer;margin:5px}
+
+button:hover{background:#2980b9}
+
+.controls{margin-bottom:20px;padding:15px;background:#f8f9fa;border-radius:6px}
+
+input{padding:8px;border:1px solid #ddd;border-radius:4px}
+
+.instructions{background:#e8f4f8;padding:15px;border-radius:6px;margin-bottom:20px}
+
+</style>
+
 </head>
+
 <body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1">&lt;title&gt;Department Schedule Planner&lt;/title&gt;</p>
-<p class="p1">&lt;style&gt;</p>
-<p class="p1">body{font-family:Arial,sans-serif;padding:20px;background:#f5f5f5}</p>
-<p class="p1">.container{max-width:1200px;margin:0 auto;background:white;padding:30px;border-radius:8px}</p>
-<p class="p1">h1{color:#2c3e50;margin-bottom:30px}</p>
-<p class="p1">.faculty{margin-bottom:40px;border:1px solid #ddd;border-radius:6px;overflow:hidden}</p>
-<p class="p1">.faculty-header{background:#34495e;color:white;padding:15px;font-size:18px;font-weight:bold}</p>
-<p class="p1">.year{padding:15px;border-bottom:1px solid #eee}</p>
-<p class="p1">.semester{margin:10px 0}</p>
-<p class="p1">.semester-label{font-weight:bold;margin-bottom:8px}</p>
-<p class="p1">.boxes{display:flex;gap:8px;flex-wrap:wrap}</p>
-<p class="p1">.box{width:50px;height:50px;border:2px solid #bdc3c7;border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:bold;background:white;font-size:14px}</p>
-<p class="p1">.box.teaching{background:#3498db;border-color:#2980b9;color:white}</p>
-<p class="p1">.box.release{background:#e74c3c;border-color:#c0392b;color:white}</p>
-<p class="p1">.box.sabbatical{background:#95a5a6;border-color:#7f8c8d;color:white}</p>
-<p class="p1">.legend{display:flex;gap:20px;margin-bottom:20px;padding:15px;background:#f8f9fa;border-radius:6px}</p>
-<p class="p1">.legend-item{display:flex;align-items:center;gap:8px}</p>
-<p class="p1">.legend-box{width:30px;height:30px;border-radius:4px;border:2px solid}</p>
-<p class="p1">button{padding:8px 16px;background:#3498db;color:white;border:none;border-radius:4px;cursor:pointer;margin:5px}</p>
-<p class="p1">button:hover{background:#2980b9}</p>
-<p class="p1">.controls{margin-bottom:20px;padding:15px;background:#f8f9fa;border-radius:6px}</p>
-<p class="p1">input{padding:8px;border:1px solid #ddd;border-radius:4px}</p>
-<p class="p1">.instructions{background:#e8f4f8;padding:15px;border-radius:6px;margin-bottom:20px}</p>
-<p class="p1">&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body&gt;</p>
-<p class="p1">&lt;div class="container"&gt;</p>
-<p class="p1">&lt;h1&gt;Department Teaching Schedule Planner&lt;/h1&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="instructions"&gt;</p>
-<p class="p1">&lt;strong&gt;Instructions:&lt;/strong&gt; Click boxes to cycle through: Empty → Teaching (Blue) → Release (Red) → Empty.<span class="Apple-converted-space"> </span></p>
-<p class="p1">Use "Set Sabbatical" to mark entire semester.</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="controls"&gt;</p>
-<p class="p1">&lt;input type="text" id="facultyName" placeholder="Faculty name"&gt;</p>
-<p class="p1">&lt;button onclick="addFaculty()"&gt;Add Faculty&lt;/button&gt;</p>
-<p class="p1">&lt;button onclick="exportData()"&gt;Save Data&lt;/button&gt;</p>
-<p class="p1">&lt;button onclick="window.print()"&gt;Print&lt;/button&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div class="legend"&gt;</p>
-<p class="p1">&lt;div class="legend-item"&gt;&lt;div class="legend-box" style="background:#3498db;border-color:#2980b9"&gt;&lt;/div&gt;&lt;span&gt;Teaching&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;div class="legend-item"&gt;&lt;div class="legend-box" style="background:#e74c3c;border-color:#c0392b"&gt;&lt;/div&gt;&lt;span&gt;Course Release&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;div class="legend-item"&gt;&lt;div class="legend-box" style="background:#95a5a6;border-color:#7f8c8d"&gt;&lt;/div&gt;&lt;span&gt;Sabbatical&lt;/span&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;div id="schedule"&gt;&lt;/div&gt;</p>
-<p class="p1">&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1">&lt;script&gt;</p>
-<p class="p1">let data=[</p>
-<p class="p1">{name:'Faculty 1',schedule:{}},</p>
-<p class="p1">{name:'Faculty 2',schedule:{}},</p>
-<p class="p1">{name:'Faculty 3',schedule:{}},</p>
-<p class="p1">{name:'Faculty 4',schedule:{}}</p>
-<p class="p1">];</p>
-<p class="p1">const years=['2025-26','2026-27','2027-28'];</p>
-<p class="p1">const semesters=['Fall','Spring'];</p>
-<p class="p2"><br></p>
-<p class="p1">function init(){</p>
-<p class="p1">data.forEach(f=&gt;{</p>
-<p class="p1">years.forEach(y=&gt;{</p>
-<p class="p1">semesters.forEach(s=&gt;{</p>
-<p class="p1">const k=y+'-'+s;</p>
-<p class="p1">if(!f.schedule[k])f.schedule[k]={courses:['','','','',''],sab:false};</p>
-<p class="p1">});</p>
-<p class="p1">});</p>
-<p class="p1">});</p>
-<p class="p1">render();</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">function toggle(fi,k,ci){</p>
-<p class="p1">const f=data[fi];</p>
-<p class="p1">const sem=f.schedule[k];</p>
-<p class="p1">if(sem.sab)return;</p>
-<p class="p1">const states=['','teaching','release'];</p>
-<p class="p1">const idx=states.indexOf(sem.courses[ci]);</p>
-<p class="p1">sem.courses[ci]=states[(idx+1)%3];</p>
-<p class="p1">render();</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">function toggleSab(fi,k){</p>
-<p class="p1">const sem=data[fi].schedule[k];</p>
-<p class="p1">sem.sab=!sem.sab;</p>
-<p class="p1">if(sem.sab)sem.courses=['sabbatical','sabbatical','sabbatical','sabbatical','sabbatical'];</p>
-<p class="p1">else sem.courses=['','','','',''];</p>
-<p class="p1">render();</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">function render(){</p>
-<p class="p1">let html='';</p>
-<p class="p1">data.forEach((f,fi)=&gt;{</p>
-<p class="p1">let total=0;</p>
-<p class="p1">years.forEach(y=&gt;{</p>
-<p class="p1">semesters.forEach(s=&gt;{</p>
-<p class="p1">const sem=f.schedule[y+'-'+s];</p>
-<p class="p1">if(!sem.sab)total+=sem.courses.filter(c=&gt;c==='teaching').length;</p>
-<p class="p1">});</p>
-<p class="p1">});</p>
-<p class="p1">html+=`&lt;div class="faculty"&gt;&lt;div class="faculty-header"&gt;${f.name} - 3-Year Total: ${total} courses&lt;/div&gt;`;</p>
-<p class="p1">years.forEach(y=&gt;{</p>
-<p class="p1">html+=`&lt;div class="year"&gt;&lt;strong&gt;${y} Academic Year&lt;/strong&gt;`;</p>
-<p class="p1">semesters.forEach(s=&gt;{</p>
-<p class="p1">const k=y+'-'+s;</p>
-<p class="p1">const sem=f.schedule[k];</p>
-<p class="p1">const tc=sem.courses.filter(c=&gt;c==='teaching').length;</p>
-<p class="p1">const rc=sem.courses.filter(c=&gt;c==='release').length;</p>
-<p class="p1">let summary=sem.sab?'On Sabbatical':(tc?tc+' course'+(tc&gt;1?'s':''):'')+(rc?' , '+rc+' release'+(rc&gt;1?'s':''):'');</p>
-<p class="p1">if(!sem.sab &amp;&amp; !tc &amp;&amp; !rc)summary='Not teaching';</p>
-<p class="p1">html+=`&lt;div class="semester"&gt;&lt;div class="semester-label"&gt;${s}: ${summary}&lt;/div&gt;&lt;div class="boxes"&gt;`;</p>
-<p class="p1">sem.courses.forEach((c,ci)=&gt;{</p>
-<p class="p1">const label=c==='teaching'?(ci+1):c==='release'?'R':c==='sabbatical'?'S':(ci+1);</p>
-<p class="p1">html+=`&lt;div class="box ${c}" onclick="toggle(${fi},'${k}',${ci})"&gt;${label}&lt;/div&gt;`;</p>
-<p class="p1">});</p>
-<p class="p1">html+=`&lt;/div&gt;&lt;button onclick="toggleSab(${fi},'${k}')"&gt;${sem.sab?'Clear':'Set'} Sabbatical&lt;/button&gt;&lt;/div&gt;`;</p>
-<p class="p1">});</p>
-<p class="p1">html+=`&lt;/div&gt;`;</p>
-<p class="p1">});</p>
-<p class="p1">html+=`&lt;/div&gt;`;</p>
-<p class="p1">});</p>
-<p class="p1">document.getElementById('schedule').innerHTML=html;</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">function addFaculty(){</p>
-<p class="p1">const name=document.getElementById('facultyName').value.trim();</p>
-<p class="p1">if(!name){alert('Please enter a faculty name');return;}</p>
-<p class="p1">data.push({name:name,schedule:{}});</p>
-<p class="p1">document.getElementById('facultyName').value='';</p>
-<p class="p1">init();</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">function exportData(){</p>
-<p class="p1">const str=JSON.stringify(data,null,2);</p>
-<p class="p1">const blob=new Blob([str],{type:'application/json'});</p>
-<p class="p1">const url=URL.createObjectURL(blob);</p>
-<p class="p1">const a=document.createElement('a');</p>
-<p class="p1">a.href=url;</p>
-<p class="p1">a.download='department-schedule.json';</p>
-<p class="p1">a.click();</p>
-<p class="p1">}</p>
-<p class="p2"><br></p>
-<p class="p1">init();</p>
-<p class="p1">&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
+
+<div class="container">
+
+<h1>Department Teaching Schedule Planner</h1>
+
+
+
+<div class="instructions">
+
+<strong>Instructions:</strong> Click boxes to cycle through: Empty → Teaching (Blue) → Release (Red) → Empty. 
+
+Use "Set Sabbatical" to mark entire semester.
+
+</div>
+
+
+
+<div class="controls">
+
+<input type="text" id="facultyName" placeholder="Faculty name">
+
+<button onclick="addFaculty()">Add Faculty</button>
+
+<button onclick="exportData()">Save Data</button>
+
+<button onclick="window.print()">Print</button>
+
+</div>
+
+
+
+<div class="legend">
+
+<div class="legend-item"><div class="legend-box" style="background:#3498db;border-color:#2980b9"></div><span>Teaching</span></div>
+
+<div class="legend-item"><div class="legend-box" style="background:#e74c3c;border-color:#c0392b"></div><span>Course Release</span></div>
+
+<div class="legend-item"><div class="legend-box" style="background:#95a5a6;border-color:#7f8c8d"></div><span>Sabbatical</span></div>
+
+</div>
+
+
+
+<div id="schedule"></div>
+
+</div>
+
+
+
+<script>
+
+let data=[
+
+{name:'Faculty 1',schedule:{}},
+
+{name:'Faculty 2',schedule:{}},
+
+{name:'Faculty 3',schedule:{}},
+
+{name:'Faculty 4',schedule:{}}
+
+];
+
+const years=['2025-26','2026-27','2027-28'];
+
+const semesters=['Fall','Spring'];
+
+
+
+function init(){
+
+data.forEach(f=>{
+
+years.forEach(y=>{
+
+semesters.forEach(s=>{
+
+const k=y+'-'+s;
+
+if(!f.schedule[k])f.schedule[k]={courses:['','','','',''],sab:false};
+
+});
+
+});
+
+});
+
+render();
+
+}
+
+
+
+function toggle(fi,k,ci){
+
+const f=data[fi];
+
+const sem=f.schedule[k];
+
+if(sem.sab)return;
+
+const states=['','teaching','release'];
+
+const idx=states.indexOf(sem.courses[ci]);
+
+sem.courses[ci]=states[(idx+1)%3];
+
+render();
+
+}
+
+
+
+function toggleSab(fi,k){
+
+const sem=data[fi].schedule[k];
+
+sem.sab=!sem.sab;
+
+if(sem.sab)sem.courses=['sabbatical','sabbatical','sabbatical','sabbatical','sabbatical'];
+
+else sem.courses=['','','','',''];
+
+render();
+
+}
+
+
+
+function render(){
+
+let html='';
+
+data.forEach((f,fi)=>{
+
+let total=0;
+
+years.forEach(y=>{
+
+semesters.forEach(s=>{
+
+const sem=f.schedule[y+'-'+s];
+
+if(!sem.sab)total+=sem.courses.filter(c=>c==='teaching').length;
+
+});
+
+});
+
+html+=`<div class="faculty"><div class="faculty-header">${f.name} - 3-Year Total: ${total} courses</div>`;
+
+years.forEach(y=>{
+
+html+=`<div class="year"><strong>${y} Academic Year</strong>`;
+
+semesters.forEach(s=>{
+
+const k=y+'-'+s;
+
+const sem=f.schedule[k];
+
+const tc=sem.courses.filter(c=>c==='teaching').length;
+
+const rc=sem.courses.filter(c=>c==='release').length;
+
+let summary=sem.sab?'On Sabbatical':(tc?tc+' course'+(tc>1?'s':''):'')+(rc?' , '+rc+' release'+(rc>1?'s':''):'');
+
+if(!sem.sab && !tc && !rc)summary='Not teaching';
+
+html+=`<div class="semester"><div class="semester-label">${s}: ${summary}</div><div class="boxes">`;
+
+sem.courses.forEach((c,ci)=>{
+
+const label=c==='teaching'?(ci+1):c==='release'?'R':c==='sabbatical'?'S':(ci+1);
+
+html+=`<div class="box ${c}" onclick="toggle(${fi},'${k}',${ci})">${label}</div>`;
+
+});
+
+html+=`</div><button onclick="toggleSab(${fi},'${k}')">${sem.sab?'Clear':'Set'} Sabbatical</button></div>`;
+
+});
+
+html+=`</div>`;
+
+});
+
+html+=`</div>`;
+
+});
+
+document.getElementById('schedule').innerHTML=html;
+
+}
+
+
+
+function addFaculty(){
+
+const name=document.getElementById('facultyName').value.trim();
+
+if(!name){alert('Please enter a faculty name');return;}
+
+data.push({name:name,schedule:{}});
+
+document.getElementById('facultyName').value='';
+
+init();
+
+}
+
+
+
+function exportData(){
+
+const str=JSON.stringify(data,null,2);
+
+const blob=new Blob([str],{type:'application/json'});
+
+const url=URL.createObjectURL(blob);
+
+const a=document.createElement('a');
+
+a.href=url;
+
+a.download='department-schedule.json';
+
+a.click();
+
+}
+
+
+
+init();
+
+</script>
+
 </body>
+
 </html>
